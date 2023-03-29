@@ -1,0 +1,36 @@
+.dropdown {
+  gap: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  position: relative;
+
+  &_header {
+    width: 100%;
+    gap: 0.25rem;
+    display: flex;
+    padding: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    border-radius: 0.25rem;
+    border: 1px solid #dddcdc;
+    background-color: #ffffff;
+    justify-content: space-between;
+
+    &__title {
+      color: #000000;
+    }
+  }
+
+  &_content {
+    margin: 0;
+    top: 100%;
+    width: 100%;
+    padding: 0.5rem;
+    position: absolute;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    border: 1px solid #dddcdc;
+  }
+}
