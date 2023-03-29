@@ -1,11 +1,10 @@
 import Banner from "./banner";
 import Navbar from "./navbar";
 import SearchBar from "./searchBar";
-import styles from "./styles.module.scss";
 
 function Header() {
   return (
-    <header className={styles.header}>
+    <header className={'w-full bg-white shadow-sm'}>
       <Banner />
       <Navbar />
       <SearchBar />

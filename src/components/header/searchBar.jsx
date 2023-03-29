@@ -1,37 +1,25 @@
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { FaOpencart, FaSearch } from "react-icons/fa";
-import styles from "./styles.module.scss";
+import {RiSearch2Line} from "react-icons/ri";
 
 function SearchBar() {
-  return (
-    <div className={styles.searchbar}>
-      <Link href="/" className={styles.searchbar__logo}>
-        <Image
-          width={200}
-          height={50}
-          alt="logo shop pay"
-          src={"/images/logo.png"}
-        />
-      </Link>
-      <div className={styles.searchbar__main}>
-        <input
-          type="text"
-          placeholder="Search..."
-          className={styles.searchbar__input}
-        />
-        <button className={styles.searchbar__button}>
-          <FaSearch />
-        </button>
-      </div>
-      <div className={styles.searchbar__cart}>
-        <Link href={"/cart"}>
-          <FaOpencart color="#000000" />
-          <span className={styles.searchbar__cart_badge}>0</span>
-        </Link>
-      </div>
-    </div>
-  );
+    return (
+        <div className={'w-full'}>
+            <div className="container mx-auto">
+                <div className="flex justify-center p-2">
+                    <div className="w-3/4 flex rounded transition bg-zinc-100 hover:bg-zinc-200">
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            className={'w-full bg-transparent focus:outline-none px-2'}
+                        />
+                        <button className={'bg-blue-500 rounded-br rounded-tr flex justify-center items-center h-10 w-10'}>
+                            <RiSearch2Line color='#ffffff' size={20}/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
+
 export default SearchBar;

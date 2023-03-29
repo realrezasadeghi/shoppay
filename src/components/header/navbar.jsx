@@ -1,71 +1,74 @@
 import Link from "next/link";
-import styles from "./styles.module.scss";
 import {
-  MdHelp,
-  MdSecurity,
-  MdFavorite,
-  MdAccountCircle,
-  MdHomeRepairService,
+    MdHelp,
+    MdSecurity,
+    MdFavorite,
+    MdHomeRepairService,
 } from "react-icons/md";
-import Dropdown from "@/components/dropdown";
-import { useState } from "react";
 import Image from "next/image";
+import React from "react";
 
 const NAVBAR_LIST = [
-  {
-    id: 1,
-    title: "",
-    href: "",
-    icon: "",
-  },
-  {
-    id: 2,
-    href: "/protection",
-    icon: <MdSecurity />,
-    title: "Buyer Protection",
-  },
-  {
-    id: 3,
-    href: "/service",
-    title: "Custom Service",
-    icon: <MdHomeRepairService />,
-  },
-  {
-    id: 4,
-    href: "/help",
-    title: "Help",
-    icon: <MdHelp />,
-  },
-  {
-    id: 5,
-    title: "Wishlist",
-    href: "/wishlist",
-    icon: <MdFavorite color="red" />,
-  },
+    {
+        id: 1,
+        title: "",
+        href: "",
+        icon: "",
+    },
+    {
+        id: 2,
+        href: "/protection",
+        icon: <MdSecurity/>,
+        title: "Buyer Protection",
+    },
+    {
+        id: 3,
+        href: "/service",
+        title: "Custom Service",
+        icon: <MdHomeRepairService/>,
+    },
+    {
+        id: 4,
+        href: "/help",
+        title: "Help",
+        icon: <MdHelp/>,
+    },
+    {
+        id: 5,
+        title: "Wishlist",
+        href: "/wishlist",
+        icon: <MdFavorite />,
+    },
 ];
 
 function Navbar() {
-  return (
-    <div className={styles.navbar}>
-      <div className={styles.navbar__container}>
-        <nav className={styles.navbar__nav}>
-          <Link href={"/"} className={styles.navbar__logo}>
-            <h3>ShopPay</h3>
-          </Link>
-          <ul className={styles.navbar__list}>
-            {NAVBAR_LIST.map((item) => (
-              <li key={item.id}>
-                <Link href={item.href} className={styles.navbar__list_item}>
-                  {item.icon}
-                  <span>{item.title}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </div>
-  );
+    return (
+        <div className={'w-full bg-zinc-100'}>
+            <div className={'container mx-auto'}>
+                <nav className={'w-full flex items-center justify-between p-2'}>
+                    <Link href="/">
+                        <Image
+                            width={150}
+                            height={50}
+                            alt="logo shop pay"
+                            src={"/images/logo.png"}
+                        />
+                    </Link>
+                    <ul className={'flex items-center gap-4'}>
+                        {NAVBAR_LIST.map((item) => (
+                            <li key={item.id}>
+                                <Link href={item.href}
+                                      className={'flex items-center gap-1 text-zinc-400 transition hover:text-zinc-700'}>
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    );
 }
 
 export default Navbar;
