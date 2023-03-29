@@ -43,7 +43,7 @@ const NAVBAR_LIST = [
 
 function Navbar() {
     return (
-        <div className={'w-full bg-zinc-100'}>
+        <div className={'w-full bg-slate-900'}>
             <div className={'container mx-auto'}>
                 <nav className={'w-full flex items-center justify-between p-2'}>
                     <Link href="/">
