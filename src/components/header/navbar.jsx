@@ -4,9 +4,11 @@ import {
     MdSecurity,
     MdFavorite,
     MdHomeRepairService,
+    MdAccountCircle
 } from "react-icons/md";
 import Image from "next/image";
 import React from "react";
+import {useSession} from "next-auth/react";
 
 const NAVBAR_LIST = [
     {
@@ -37,11 +39,12 @@ const NAVBAR_LIST = [
         id: 5,
         title: "Wishlist",
         href: "/wishlist",
-        icon: <MdFavorite />,
+        icon: <MdFavorite/>,
     },
 ];
 
 function Navbar() {
+    const {data: session, status} = useSession()
     return (
         <div className={'w-full bg-slate-900'}>
             <div className={'container mx-auto'}>
@@ -58,13 +61,26 @@ function Navbar() {
                         {NAVBAR_LIST.map((item) => (
                             <li key={item.id}>
                                 <Link href={item.href}
-                                      className={'flex items-center gap-1 text-zinc-400 transition hover:text-zinc-700'}>
+                                      className={'flex items-center gap-1 text-zinc-400 transition hover:text-white'}>
                                     {item.icon}
                                     <span>{item.title}</span>
                                 </Link>
                             </li>
                         ))}
                     </ul>
+                    <div className={'flex items-center gap-2 text-white p-2'}>
+                        {status === 'authenticated' ? (
+                            <>
+                                <img src={session.user.image} alt={session.user.email} width={40} height={40} className={'rounded-full'}/>
+                                <span>{session.user.name || session.user.email}</span>
+                            </>
+                        ) : (
+                            <>
+                                <MdAccountCircle size={40} color={'orange'}/>
+                                <span>Account</span>
+                            </>
+                        )}
+                    </div>
                 </nav>
             </div>
         </div>

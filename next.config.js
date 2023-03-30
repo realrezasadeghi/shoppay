@@ -1,11 +1,15 @@
-const path = require("path");
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  sassOptions: {
-    includePaths: [path.join(__dirname, "src", "assets", "styles")],
-  },
+    reactStrictMode: true,
+    images: {
+        remotePatterns: [
+            {
+                port: '',
+                protocol: 'https',
+                hostname: 'avatars.githubusercontent.com',
+            }
+        ]
+    }
 };
 
 module.exports = nextConfig;

@@ -1,11 +1,9 @@
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import {useSession} from "next-auth/react";
 
 function HomePage() {
     return (
         <div className="home">
-            <Header/>
-            <Footer/>
+
         </div>
     );
 }
