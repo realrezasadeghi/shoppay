@@ -16,7 +16,7 @@ function MainLayout({children}) {
                 <meta name="description" content="Shoppay a service for sale and buy"/>
             </Head>
             <Header/>
-            <main className={'w-full'}>
+            <main className={'w-full py-4'}>
                 {children}
             </main>
             <Footer/>
