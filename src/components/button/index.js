@@ -7,6 +7,8 @@ function Button({
                     endIcon,
                     iconOnly,
                     startIcon,
+                    children,
+                    classNameButton,
                     color = 'amber',
                     percent = 500,
                     circle = false,
@@ -19,12 +21,13 @@ function Button({
     const _startIcon = () => React.isValidElement(startIcon) ? startIcon : null
     const _endIcon = () => React.isValidElement(endIcon) ? endIcon : null
 
-    const classes = classNames('inline-flex justify-center items-center gap-2 p-2', circle ? 'rounded-full' : roundedSize, `bg-${color}-${percent}`, `text${textColor}`)
+    const classes = classNames('inline-flex justify-center items-center gap-2 p-2', classNameButton, circle ? 'rounded-full' : roundedSize, `bg-${color}-${percent}`, `text${textColor}`)
 
     return (
         <button className={classes} type={type} {...props}>
             {_startIcon()}
             {_label()}
+            {children}
             {_endIcon()}
         </button>
     )

@@ -6,6 +6,7 @@ import {FormProvider, useForm} from 'react-hook-form'
 import {getProviders} from "next-auth/react";
 import * as yup from 'yup'
 import {yupResolver} from "@hookform/resolvers/yup";
+import ListSocials from "@/components/listSocials";
 
 const defaultValues = {
     email: 'ehsan@gmail.com',
@@ -18,6 +19,7 @@ const resolver = yup.object().shape({
 })
 
 function Signin({socials}) {
+
     const methods = useForm({
         mode: 'onChange',
         defaultValues,
@@ -53,6 +55,8 @@ function Signin({socials}) {
                                     Forget password ?
                                 </Link>
                                 <Button label={'Submit'} type={'submit'}/>
+                                <p className={'text-center text-xs text-gray-400'}>Or Continu With</p>
+                                <ListSocials socials={socials} onClick={(id) =>{}}/>
                             </form>
                         </FormProvider>
                     </div>
