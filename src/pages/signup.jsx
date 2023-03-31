@@ -21,9 +21,13 @@ function Signup() {
           onSubmit={methods.handleSubmit(onSubmit)}
         >
           <TextField label={"Name"} name="name" />
-          <TextField label={"E-mail"} name="email" />
-          <TextField label={"Password"} name="password" />
-          <TextField label={"Confirm password"} name="confirmPassword" />
+          <TextField label={"E-mail"} name="email" type={"email"} />
+          <TextField label={"Password"} name="password" type={"password"} />
+          <TextField
+            label={"Confirm password"}
+            name="confirmPassword"
+            type={"password"}
+          />
           <Button label={"Submit"} />
         </form>
       </FormProvider>
