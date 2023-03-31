@@ -1,9 +1,32 @@
-import TextField from "@/components/textField";
-import {MdKeyboardBackspace, MdOutlineKeyboardArrowRight} from "react-icons/md";
 import Link from "next/link";
 import Button from "@/components/button";
+import TextField from "@/components/textField";
+import {MdKeyboardBackspace} from "react-icons/md";
+import {FormProvider, useForm} from 'react-hook-form'
+import {getProviders} from "next-auth/react";
+import * as yup from 'yup'
+import {yupResolver} from "@hookform/resolvers/yup";
 
-function Signin() {
+const defaultValues = {
+    email: 'ehsan@gmail.com',
+    password: '12345678'
+}
+
+const resolver = yup.object().shape({
+    email: yup.string().required('Email is required').email('Email is not valid'),
+    password: yup.string().required('Password is required').min(8, 'Password min 8 char')
+})
+
+function Signin({socials}) {
+    const methods = useForm({
+        mode: 'onChange',
+        defaultValues,
+        resolver: yupResolver(resolver)
+    })
+
+    const onSubmit = (data) => {
+    }
+
     return (
         <div className={'w-full'}>
             <div className="container mx-auto">
@@ -22,15 +45,31 @@ function Signin() {
                         <p className={'text-sm text-gray-400'}>
                             Get access to one of the best Eshopping services in the world
                         </p>
-                        <form className={'flex flex-col gap-4'}>
-                            <TextField type={'text'}/>
-                            <Button label={'Submit'} type={'submit'} endIcon={<MdOutlineKeyboardArrowRight/>}/>
-                        </form>
+                        <FormProvider {...methods}>
+                            <form className={'w-full flex flex-col gap-4'} onSubmit={methods.handleSubmit(onSubmit)}>
+                                <TextField.Form name={'email'} label={'E-mail'} type={'email'}/>
+                                <TextField.Form name={'password'} label={'Password'} type={'password'}/>
+                                <Link href={'/forget-password'} className={'text-sm text-gray-400 hover:text-gray-700'}>
+                                    Forget password ?
+                                </Link>
+                                <Button label={'Submit'} type={'submit'}/>
+                            </form>
+                        </FormProvider>
                     </div>
                 </div>
             </div>
         </div>
     )
+}
+
+export async function getStaticProps() {
+    const socials = Object.values(await getProviders())
+
+    return {
+        props: {
+            socials
+        }
+    }
 }
 
 export default Signin;
