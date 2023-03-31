@@ -12,6 +12,7 @@ function Button({
                     color = 'amber',
                     percent = 500,
                     circle = false,
+                    disabled = false,
                     textColor = 'black',
                     roundedSize = 'rounded-sm',
                     ...props
@@ -21,7 +22,10 @@ function Button({
     const _startIcon = () => React.isValidElement(startIcon) ? startIcon : null
     const _endIcon = () => React.isValidElement(endIcon) ? endIcon : null
 
-    const classes = classNames('inline-flex justify-center items-center gap-2 p-2', classNameButton, circle ? 'rounded-full' : roundedSize, `bg-${color}-${percent}`, `text${textColor}`)
+    const classes = classNames('inline-flex justify-center items-center gap-2 p-2', classNameButton, circle ? 'rounded-full' : roundedSize, `bg-${color}-${percent}`, `text${textColor}`, {
+        'bg-gray-200': disabled,
+        'cursor-not-allowed': disabled
+    })
 
     return (
         <button className={classes} type={type} {...props}>

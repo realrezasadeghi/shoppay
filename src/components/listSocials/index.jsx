@@ -9,7 +9,6 @@ const ICONS_SOCIALS = {
 function ListSocials({socials = [], onClick}) {
     return (
         <div className={'flex flex-col gap-4'}>
-
             {
                 socials.map((social) => (
                     <Button
