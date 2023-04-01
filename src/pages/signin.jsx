@@ -5,7 +5,12 @@ import AuthLayout from "@/layouts/AuthLayout";
 import TextField from "@/components/textField";
 import ListSocials from "@/components/listSocials";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getProviders, signIn } from "next-auth/react";
+import {
+  getCsrfToken,
+  getProviders,
+  getSession,
+  signIn,
+} from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
@@ -22,7 +27,7 @@ const signInValidation = yup.object().shape({
     .min(8, "Password min 8 char"),
 });
 
-function Signin({ socials }) {
+function Signin({ socials, csrfToken, callbackUrl }) {
   const router = useRouter();
   const methods = useForm({
     mode: "onChange",
@@ -36,7 +41,7 @@ function Signin({ socials }) {
       redirect: false,
     };
     const user = await signIn("credentials", options);
-    if (user) router.push("/");
+    if (user) router.push(callbackUrl || "/");
   };
 
   return (
@@ -71,12 +76,25 @@ function Signin({ socials }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, query }) {
   const socials = Object.values(await getProviders());
+
+  const session = await getSession({ req });
+  const { callbackUrl } = query;
+  if (session)
+    return {
+      redirect: {
+        destination: callbackUrl,
+      },
+    };
+
+  const csrfToken = await getCsrfToken({ req });
 
   return {
     props: {
       socials,
+      callbackUrl,
+      csrfToken,
     },
   };
 }

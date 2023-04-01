@@ -35,6 +35,14 @@ export default NextAuth({
       },
     }),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      const user = await User.findById(token.sub);
+      session.id = user._id;
+      session.role = user.role || "user";
+      return session;
+    },
+  },
   pages: {
     signIn: "/signin",
   },

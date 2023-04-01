@@ -1,12 +1,12 @@
 import Link from "next/link";
 import * as yup from "yup";
-import { toast } from "react-toastify";
 import Button from "@/components/button";
 import AuthLayout from "@/layouts/AuthLayout";
 import { useSignup } from "@/api/auth/signup";
 import TextField from "@/components/textField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 const defaultValues = {
   name: "",
@@ -32,6 +32,7 @@ const signUpValidation = yup.object().shape({
 });
 
 function Signup() {
+  const router = useRouter();
   const methods = useForm({
     mode: "onChange",
     defaultValues,
@@ -41,14 +42,8 @@ function Signup() {
 
   const onSubmit = (data) => {
     signupUser(data, {
-      onError: (error) => {
-        toast.error(error.message, {
-          position: "bottom-left",
-          draggable: true,
-        });
-      },
       onSuccess: (data) => {
-        toast.success(data.message, { position: "top-right", draggable: true });
+        router.replace("/signin");
       },
     });
   };
