@@ -1,23 +1,31 @@
 import wrapper from "@/store";
-import {Provider as StoreProvider} from "react-redux";
-import {SessionProvider} from 'next-auth/react'
+import MainLayout from "@/layouts/MainLayout";
+import { SessionProvider } from "next-auth/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Provider as StoreProvider } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 import "@/assets/styles/global.scss";
-import MainLayout from "@/layouts/MainLayout";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function App({Component, ...rest}) {
-    const {store, props} = wrapper.useWrappedStore(rest);
-    const {pageProps} = props;
+const queryClient = new QueryClient({});
 
-    return (
-        <>
-            <SessionProvider session={pageProps.session}>
-                <StoreProvider store={store}>
-                    <MainLayout>
-                        <Component {...pageProps} />
-                    </MainLayout>
-                </StoreProvider>
-            </SessionProvider>
-        </>
-    );
+export default function App({ Component, ...rest }) {
+  const { store, props } = wrapper.useWrappedStore(rest);
+  const { pageProps } = props;
+
+  return (
+    <>
+      <SessionProvider session={pageProps.session}>
+        <StoreProvider store={store}>
+          <QueryClientProvider client={queryClient}>
+            <MainLayout>
+              <Component {...pageProps} />
+              <ToastContainer />
+            </MainLayout>
+          </QueryClientProvider>
+        </StoreProvider>
+      </SessionProvider>
+    </>
+  );
 }

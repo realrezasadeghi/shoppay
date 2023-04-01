@@ -19,7 +19,6 @@ handler.post(async (req, res) => {
       password: cryptedPassword(password),
     });
     const token = generateToken({ id: newUser._id });
-    console.log(token);
     res
       .status(200)
       .json({ message: "User successful added", result: newUser, token });

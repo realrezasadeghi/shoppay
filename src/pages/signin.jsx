@@ -28,7 +28,9 @@ function Signin({ socials }) {
     resolver: yupResolver(signInValidation),
   });
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <AuthLayout title={"Sign in"}>
