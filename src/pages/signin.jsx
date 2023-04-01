@@ -7,6 +7,7 @@ import ListSocials from "@/components/listSocials";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getProviders, signIn } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 const defaultValues = {
   email: "",
@@ -22,14 +23,20 @@ const signInValidation = yup.object().shape({
 });
 
 function Signin({ socials }) {
+  const router = useRouter();
   const methods = useForm({
     mode: "onChange",
     defaultValues,
     resolver: yupResolver(signInValidation),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const options = {
+      ...data,
+      redirect: false,
+    };
+    const user = await signIn("credentials", options);
+    if (user) router.push("/");
   };
 
   return (
