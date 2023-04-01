@@ -1,6 +1,7 @@
 import Button from "@/components/button";
 import TextField from "@/components/textField";
 import AuthLayout from "@/layouts/AuthLayout";
+import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 
 const defaultValues = {
@@ -17,17 +18,20 @@ function Signup() {
     <AuthLayout title={"Sign up"}>
       <FormProvider>
         <form
-          className="w-full flex flex-col gap-4"
+          className="w-full flex flex-col gap-4 focus:textc"
           onSubmit={methods.handleSubmit(onSubmit)}
         >
           <TextField label={"Name"} name="name" />
           <TextField label={"E-mail"} name="email" type={"email"} />
           <TextField label={"Password"} name="password" type={"password"} />
           <TextField
-            label={"Confirm password"}
-            name="confirmPassword"
             type={"password"}
+            name="confirmPassword"
+            label={"Confirm password"}
           />
+          <Link href={"/signin"} className="text-xs text-gray-400">
+            Are you already account ? Sign in
+          </Link>
           <Button label={"Submit"} />
         </form>
       </FormProvider>
