@@ -1,11 +1,11 @@
-import {useSession} from "next-auth/react";
+import Main from "@/modules/home/components/main";
 
 function HomePage() {
-    return (
-        <div className="home">
-
-        </div>
-    );
+  return (
+    <div className="w-full">
+      <Main />
+    </div>
+  );
 }
 
 export default HomePage;
