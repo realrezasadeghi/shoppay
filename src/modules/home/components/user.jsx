@@ -31,7 +31,7 @@ function User() {
     },
   ];
   return (
-    <div className="flex flex-col gap-4 w-60">
+    <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center gap-4">
         <h3 className="font-bold uppercase w-full overflow-hidden whitespace-nowrap text-ellipsis">
           Buyer club benefits
@@ -54,18 +54,6 @@ function User() {
             </Button>
           ))}
         </div>
-        <Carousel
-          slides={ITEMS_USER}
-          renderItem={(slide) => (
-            <div className="relative h-56 flex-[0_0_100%]">
-              <img
-                src={slide.image}
-                alt=""
-                className="w-full h-full rounded-full"
-              />
-            </div>
-          )}
-        />
       </div>
     </div>
   );

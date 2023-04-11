@@ -3,7 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import CarouselDots from "./carouselDots";
 import CarouselButton from "./carouselButton";
 
-const Carousel = ({ options, slides = [], renderItem }) => {
+const Carousel = ({ options, slides = [], renderItem, showDot = false }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const [scrollSnaps, setScrollSnaps] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -35,18 +35,20 @@ const Carousel = ({ options, slides = [], renderItem }) => {
   }, [emblaApi, setScrollSnaps, onSelect]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, index) => (
             <React.Fragment key={index}>{renderItem(slide)}</React.Fragment>
           ))}
         </div>
-        <CarouselDots
-          items={scrollSnaps}
-          selectedIndex={selectedIndex}
-          onClick={(index) => scrollTo(index)}
-        />
+        {showDot ? (
+          <CarouselDots
+            items={scrollSnaps}
+            selectedIndex={selectedIndex}
+            onClick={(index) => scrollTo(index)}
+          />
+        ) : null}
         {/* <CarouselButton type={"next"} onClick={onNext} /> */}
         {/* <CarouselButton type={"prev"} onClick={onPrev} /> */}
       </div>

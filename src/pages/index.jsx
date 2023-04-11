@@ -1,9 +1,13 @@
+import FlashDeals from "@/modules/home/components/flashDeals";
 import Main from "@/modules/home/components/main";
 
 function HomePage() {
   return (
     <div className="w-full">
-      <Main />
+      <div className="container mx-auto">
+        <Main />
+        <FlashDeals />
+      </div>
     </div>
   );
 }
